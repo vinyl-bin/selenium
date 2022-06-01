@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 
 baseUrl = 'https://search.naver.com/search.naver?sm=tab_hty.top&where=view&query='
 plusUrl = input('검색어를 입력하세요: ')
+print()
 url = baseUrl + urllib.parse.quote_plus(plusUrl)  #plusUrl을 변환시켜줌(영어는 변환안해도 잘 실행됨 아스키코드 어쩌구 때문에;;)
 
 html = urllib.request.urlopen(url).read()

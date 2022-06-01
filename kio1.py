@@ -31,7 +31,7 @@ driver.close()
 soup = BeautifulSoup(html_source, 'lxml')
 # 1단락 끝
 #youtube_user_IDs = soup.select('div#header-author > a > span')
-youtube_user_IDs = soup.find_all('span', 'style-scope ytd-comment-renderer')
+youtube_user_IDs = soup.find_all('h3', 'style-scope ytd-comment-renderer')
 youtube_comments = soup.find_all('yt-formatted-string', 'style-scope ytd-comment-renderer')
 #youtube_comments = soup.select('yt-formatted-string#content-text')
 # 2 단락 끝
@@ -44,8 +44,8 @@ for i in range(1, len(youtube_user_IDs), 2):
 for i in range(1, len(youtube_comments), 2):
     str_youtube_comments.append(str(youtube_comments[i].innerText))
 
-print(list(youtube_user_IDs)[1:10])
-print(list(youtube_comments)[1:10])
+print(list(youtube_user_IDs)[0:10])
+print(list(youtube_comments)[0:10])
 # for i in range(len(youtube_user_IDs)):
 #     str_tmp = str(youtube_user_IDs[i].text)
 #     #   print(str_tmp)
@@ -65,4 +65,3 @@ print(list(youtube_comments)[1:10])
 # for i in range(len(str_youtube_userIDs)):
 #     print(str_youtube_userIDs[i], str_youtube_comments[i])
 # # 4단락 끝
-
