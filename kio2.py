@@ -38,6 +38,7 @@ youtube_comments = soup.find_all('yt-formatted-string', 'style-scope ytd-comment
 str_youtube_userIDs = []
 str_youtube_comments = []
 
+
 for i in range(1, 10):
     str_youtube_userIDs.append(str(youtube_user_IDs[i]))
 
