@@ -13,6 +13,8 @@ from selenium.webdriver.common.keys import Keys
 import warnings
 warnings.filterwarnings('ignore')
 
+name=['비눗방울']
+category=['리뷰']
 
 #비눗방울 리뷰
 ns_address="https://search.shopping.naver.com/catalog/32312940336?query=%EB%B9%84%EB%88%97%EB%B0%A9%EC%9A%B8&NaPm=ct%3Dl3wbhe7k%7Cci%3Db1e4a573a939efb90f075e283fc583cf80e1ce6a%7Ctr%3Dslsl%7Csn%3D95694%7Chk%3D74e479a60372823701768de0d2a5983ab4cde64e"
@@ -43,11 +45,11 @@ sleep(2)
 
 def add_dataframe(stars,reviews,cnt):  #데이터 프레임에 저장
     #데이터 프레임생성
-    df1=pd.DataFrame(columns=['star','review'])
+    df1=pd.DataFrame(columns=['star', 'review'])
     n=1
     if (cnt>0):
         for i in range(0,cnt-1):
-            df1.loc[n]=[stars[i],reviews[i]] #해당 행에 저장
+            df1.loc[n]=[stars[i], reviews[i]] #해당 행에 저장
             i+=1
             n+=1
     else:
@@ -63,20 +65,21 @@ page=1
 
 while True:
     j=1
-    print ("페이지", page ,"\n") 
+    # print ("페이지", page ,"\n") 
     sleep(2)
     while True: #한페이지에 20개의 리뷰, 마지막 리뷰에서 error발생
         try:
             star=d.find_element_by_xpath('/html/body/div/div/div[2]/div[2]/div[2]/div[3]/div[4]/ul/li['+str(j)+']/div[1]/span[1]').text
-                       
-            stars.append(star)
+            # star.strip("평점")
+            # stars.append(star)
+            stars.append(star.strip("평점"))
             review=d.find_element_by_xpath('/html/body/div/div/div[2]/div[2]/div[2]/div[3]/div[4]/ul/li['+str(j)+']/div[2]/div[1]').text
             reviews.append(review)
             if j%2==0: #화면에 2개씩 보이도록 스크롤
                 ELEMENT = d.find_element_by_xpath('/html/body/div/div/div[2]/div[2]/div[2]/div[3]/div[4]/ul/li['+str(j)+']/div[2]/div[1]')
                 d.execute_script("arguments[0].scrollIntoView(true);", ELEMENT)       
             j+=1
-            print(cnt, review ,star, "\n")
+            print (star, review, cnt, "\n")
             cnt+=1 
         except: break
             
@@ -101,5 +104,4 @@ while True:
 df4=add_dataframe(stars,reviews,cnt)
 #save()
 
-df4.to_csv('naver3.txt', sep='\t')
-
+df4.to_csv('naverforsenti.txt')
