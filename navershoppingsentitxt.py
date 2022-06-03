@@ -89,7 +89,6 @@ while True:
         try: #리뷰의 마지막 페이지에서 error발생
             page +=1
             next_page=d.find_element_by_xpath('/html/body/div/div/div[2]/div[2]/div[2]/div[3]/div[4]/div[3]/a['+str(page)+']').click() 
-            
         except: break #리뷰의 마지막 페이지에서 process 종료
         
     else : 
@@ -104,4 +103,4 @@ while True:
 df4=add_dataframe(stars,reviews,cnt)
 #save()
 
-df4.to_csv('naverforsenti.txt')
+df4.to_csv('naverforsenti1.txt')
